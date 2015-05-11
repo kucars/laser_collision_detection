@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="cmd_vel_topic" value="/uav/cmd_vell" /> 
+  <arg name="pose_topic"    value="/mavros/vision_pose/pose" /> 
+  <arg name="scan_topic"    value="/scan" /> 
+  <arg name="min_dist"      value="0.4" /> 
+  <arg name="max_dist"      value="4.0" /> 
+  <arg name="vel_delta_t"   value="3.0" /> 
+  <arg name="octmap_res"    value="0.05" /> 
+  <arg name="robot_radius"  value="0.5" /> 
+  <node    pkg="laser_collision_detection" name="laser_collision_detection" type="laser_obstacle_detect" required="true" clear_params="true" output="screen">
+    <param name="cmd_vel_topic" value="$(arg cmd_vel_topic)" type="str"/>
+    <param name="pose_topic"    value="$(arg pose_topic)"    type="str"/>
+    <param name="scan_topic"    value="$(arg scan_topic)"    type="str"/>
+    <param name="min_dist"      value="$(arg min_dist)"      type="double"/>
+    <param name="max_dist"      value="$(arg max_dist)"      type="double"/>
+    <param name="vel_delta_t"   value="$(arg vel_delta_t)"   type="double"/>
+    <param name="octmap_res"    value="$(arg octmap_res)"    type="double"/>
+    <param name="robot_radius"  value="$(arg robot_radius)"  type="double"/>
+  </node>
+
+</launch> 
