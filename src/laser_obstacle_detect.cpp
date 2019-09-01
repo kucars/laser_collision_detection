@@ -152,7 +152,7 @@ public:
         //octTree->writeBinary("static_occ.bt");
 
         // convert the octomap::octree to fcl::octree fcl_octree object
-        OcTree* tree2 = new OcTree(boost::shared_ptr<const octomap::OcTree>(octTree));
+        OcTree* tree2 = new OcTree(std::shared_ptr<const octomap::OcTree>(octTree));
 
         octomap_msgs::Octomap octomap ;
         octomap.binary = 1 ;
@@ -171,7 +171,7 @@ public:
         }
 
         std_msgs::Bool collisionFlag;
-        boost::shared_ptr<Sphere> Shpere0(new Sphere(robotRadius));
+        std::shared_ptr<Sphere> Shpere0(new Sphere(robotRadius));
         visualization_msgs::MarkerArray marker_array ;
         visualization_msgs::Marker marker ;
 
@@ -252,7 +252,7 @@ public:
     void generateBoxesFromOctomap(std::vector<CollisionObject*>& boxes, OcTree& tree)
     {
 
-        std::vector<boost::array<FCL_REAL, 6> > boxes_ = tree.toBoxes();
+        std::vector<std::array<FCL_REAL, 6> > boxes_ = tree.toBoxes();
         for(std::size_t i = 0; i < boxes_.size(); ++i)
         {
             FCL_REAL x = boxes_[i][0];
@@ -264,7 +264,7 @@ public:
             Box* box = new Box(size, size, size);
             box->cost_density = cost;
             box->threshold_occupied = threshold;
-            CollisionObject* obj = new CollisionObject(boost::shared_ptr<CollisionGeometry>(box), Transform3f(Vec3f(x, y, z)));
+            CollisionObject* obj = new CollisionObject(std::shared_ptr<CollisionGeometry>(box), Transform3f(Vec3f(x, y, z)));
             boxes.push_back(obj);
         }
     }
